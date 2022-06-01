@@ -134,10 +134,12 @@ public class Login extends javax.swing.JFrame {
         PreparedStatement st;
         ResultSet rs;
 
-        String query = "Select * from users";
+        String query = "Select * from users where username = ? and password = ?";
 
         try {
             st = connectDataBase.getConnection().prepareStatement(query);
+            st.setString(1, username);
+            st.setString(2, password);
             rs = st.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Success", "Login Success", 2);
