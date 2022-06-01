@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2022 at 05:12 PM
+-- Generation Time: Jun 01, 2022 at 06:20 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -88,6 +88,18 @@ CREATE TABLE `nhom_mon` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nhom_mon`
+--
+
+INSERT INTO `nhom_mon` (`id`, `name`) VALUES
+(1, 'Lập trình căn bản'),
+(2, 'Lập trình nâng cao'),
+(3, 'Lập trình chuyên sâu'),
+(4, 'Khoa học xã hội'),
+(5, 'Khoa học tự nhiên'),
+(6, 'Khoa học cơ bản');
 
 -- --------------------------------------------------------
 
@@ -226,7 +238,7 @@ ALTER TABLE `mon_hoc`
 -- AUTO_INCREMENT for table `nhom_mon`
 --
 ALTER TABLE `nhom_mon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sinh_vien`
