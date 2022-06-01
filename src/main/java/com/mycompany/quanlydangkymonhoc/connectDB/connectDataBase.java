@@ -21,7 +21,7 @@ public class connectDataBase {
     private static String host = "localhost" ;
     private static String username = "root";
     private static String password = "";
-    private static String dbName = "QuanLyDangKyMonHoc";
+    private static String dbName = "10_java";
     private static Integer port = 3306;
     
     public static Connection getConnection(){
