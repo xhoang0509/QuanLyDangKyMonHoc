@@ -1,3 +1,5 @@
+package com.mycompany.quanlydangkymonhoc.connectDB;
+
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
