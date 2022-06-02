@@ -13,11 +13,12 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableNhomMon extends AbstractTableModel {
 
-    private String Name[] = {"Mã môn", "Tên môn"};
+    private String heading[] = {"Mã môn", "Tên môn"};
 
     private Class classess[] = {String.class, String.class};
 
-    ArrayList<NhomMon> dsNhomMon = new ArrayList<NhomMon>();
+//    ArrayList<NhomMon> dsNhomMon = new ArrayList<NhomMon>();
+    ArrayList<NhomMon> dsNhomMon = new ArrayList<>();
 
     public TableNhomMon(ArrayList<NhomMon> nhomMon) {
         dsNhomMon = nhomMon;
@@ -30,24 +31,24 @@ public class TableNhomMon extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return Name.length;
+        return heading.length;
     }
 
     @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        super.setValueAt(aValue, rowIndex, columnIndex); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch (columnIndex) {
+            case 0:
+               return dsNhomMon.get(rowIndex).getId();
 
+            case 1:
+                return dsNhomMon.get(rowIndex).getName();
     public Class getColumnClass(int columnIndex) {
         return classess[columnIndex];
     }
 
     public String getColumnName(int column) {
-        return Name[column];
+        return heading[column];
     }
 
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 }
