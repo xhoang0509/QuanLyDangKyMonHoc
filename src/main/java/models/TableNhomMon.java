@@ -38,13 +38,16 @@ public class TableNhomMon extends AbstractTableModel {
         super.setValueAt(aValue, rowIndex, columnIndex); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
-    
-
     public Class getColumnClass(int columnIndex) {
         return classess[columnIndex];
     }
 
     public String getColumnName(int column) {
         return Name[column];
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
