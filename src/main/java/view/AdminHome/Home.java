@@ -4,6 +4,7 @@
  */
 package view.AdminHome;
 
+import com.google.protobuf.Message;
 import view.Login.Login;
 import com.mycompany.quanlydangkymonhoc.connectDB.connectDataBase;
 import java.awt.Dimension;
@@ -28,6 +29,7 @@ import view.AdminQLSV.QLSVScreen;
 public class Home extends javax.swing.JFrame {
 
     ArrayList<NhomMon> dsNhomMon = new ArrayList<NhomMon>();
+    int dongchon = -1;
 
     /**
      * Creates new form Home
@@ -68,13 +70,11 @@ public class Home extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnQuanLyKhoa = new javax.swing.JButton();
         btnGiaoVien = new javax.swing.JButton();
         btnQLSV = new javax.swing.JButton();
         btnQLMH = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableData = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableNhomMon = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -134,7 +134,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("Trang chủ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 17, 97, 50));
 
-        jButton2.setText("Quản lý khoa");
+        btnQuanLyKhoa.setText("Quản lý khoa");
 
         btnGiaoVien.setText("Quản lý giáo viên");
         btnGiaoVien.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGiaoVien, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnQuanLyKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQLMH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQLSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -180,7 +180,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnGiaoVien, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnQuanLyKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(78, Short.MAX_VALUE))
         );
 
@@ -194,21 +194,6 @@ public class Home extends javax.swing.JFrame {
         });
         getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(676, 527, -1, -1));
 
-        tableData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tableData);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 146, 510, 444));
-
         tableNhomMon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -221,8 +206,12 @@ public class Home extends javax.swing.JFrame {
             }
         ));
         jScrollPane3.setViewportView(tableNhomMon);
+        if (tableNhomMon.getColumnModel().getColumnCount() > 0) {
+            tableNhomMon.getColumnModel().getColumn(2).setResizable(false);
+            tableNhomMon.getColumnModel().getColumn(3).setResizable(false);
+        }
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 84, 510, 444));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 510, 330));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 153));
@@ -242,16 +231,19 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         PreparedStatement st;
         ResultSet rs;
-        String sql = "SELECT * FROM nhom_mon";
+        String sql = "SELECT * FROM `nhom_mon` WHERE 1";
         try {
             st = connectDataBase.getConnection().prepareStatement(sql);
             rs = st.executeQuery();
-            List<NhomMon> nhomHocs = new ArrayList<>();
-            while (rs.next()) {
-                NhomMon x = new NhomMon(rs.getInt("id"), rs.getString("name"));
-                nhomHocs.add(x);
-            }
-            JOptionPane.showMessageDialog(null, nhomHocs.toString());
+            NhomMon x = null;
+            JOptionPane.showMessageDialog(null, rs.next());
+//            dsNhomMon.add(rs.next());
+//            while (rs.next()) {
+//                x = new NhomMon(rs.getInt("id"), rs.getString("name"));
+//                dsNhomMon.add(x);
+//                JOptionPane.showMessageDialog(null, dsNhomMon);
+//            }
+
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -320,7 +312,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnGiaoVien;
     private javax.swing.JButton btnQLMH;
     private javax.swing.JButton btnQLSV;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnQuanLyKhoa;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
@@ -340,9 +332,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tableData;
     private javax.swing.JTable tableNhomMon;
     // End of variables declaration//GEN-END:variables
 }

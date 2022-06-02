@@ -18,6 +18,17 @@ public class NhomMon {
         this.name = name;
     }
 
+    public NhomMon() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "NhomHoc{" + "id=" + id + ", name=" + name + '}';
