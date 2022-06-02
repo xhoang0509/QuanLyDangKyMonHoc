@@ -236,13 +236,13 @@ public class Home extends javax.swing.JFrame {
             st = connectDataBase.getConnection().prepareStatement(sql);
             rs = st.executeQuery();
             NhomMon x = null;
-            JOptionPane.showMessageDialog(null, rs.next());
-//            dsNhomMon.add(rs.next());
-//            while (rs.next()) {
-//                x = new NhomMon(rs.getInt("id"), rs.getString("name"));
-//                dsNhomMon.add(x);
-//                JOptionPane.showMessageDialog(null, dsNhomMon);
-//            }
+            ArrayList<NhomMon> list = new ArrayList<>();
+            while (rs.next()) {
+                x = new NhomMon(rs.getInt("id"), rs.getString("name"));
+                dsNhomMon.add(x);
+            }
+//            dsNhomMon.addAll(list);
+            LoadTableNhomMon();
 
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -335,4 +335,5 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tableNhomMon;
     // End of variables declaration//GEN-END:variables
+
 }
